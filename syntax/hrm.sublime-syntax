@@ -1,0 +1,41 @@
+%YAML 1.2
+---
+name: hrm
+file_extensions:
+  - hrm
+scope: source.hrm
+contexts:
+  main:
+    - match: \d+
+      scope: hrm.digits
+
+    - match: inbox|outbox
+      scope: hrm.std
+
+    - match: copyto|copyfrom
+      scope: hrm.copy
+
+    - match: add|sub|bump|\-|\+
+      scope: hrm.operator
+
+    - match: jump|if|zero|neg
+      scope: hrm.flow
+
+    - match: '\['
+      push: hrm.string
+
+    - match: '#'
+      push: hrm.comment
+
+  hrm.string:
+    - meta_scope: hrm.string.quoted
+    - match: '\w'
+      scope: hrm.string.content
+
+    - match: ']'
+      pop: true
+
+  hrm.comment:
+    - meta_scope: hrm.comment.content
+    - match: $
+      pop: true
