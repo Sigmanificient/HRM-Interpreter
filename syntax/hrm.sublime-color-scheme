@@ -1,0 +1,40 @@
+{
+	"rules":
+	[
+		{
+			"name": "HRM STD",
+			"scope": "hrm.std",
+			"foreground": "hsl(120, 40%, 60%)"
+		},
+		{
+			"name": "HRM digits",
+			"scope": "hrm.digits",
+			"foreground": "var(pink)"
+		},
+		{
+			"name": "HRM copy",
+			"scope": "hrm.copy",
+			"foreground": "var(red)"
+		},
+		{
+			"name": "HRM operator",
+			"scope": "hrm.operator",
+			"foreground": "var(orange)"
+		},
+		{
+			"name": "HRM flow",
+			"scope": "hrm.flow",
+			"foreground": "var(blue)"
+		},
+		{
+			"name": "HRM string",
+			"scope": "hrm.string.content",
+			"foreground": "var(pink)"
+		},
+		{
+			"name": "HRM comment",
+			"scope": "hrm.comment",
+			"foreground": "var(blue6)"
+		}
+	]
+}
