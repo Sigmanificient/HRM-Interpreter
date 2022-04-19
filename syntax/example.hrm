@@ -1,0 +1,13 @@
+jump 6
+copyto [d]
+sub [d]
+sub [d]
+outbox
+inbox
+jump if neg 2
+jump 5
+
+# other tests:
+bump -
+bump +
+jump if zero
