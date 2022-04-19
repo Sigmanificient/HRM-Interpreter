@@ -1,7 +1,6 @@
 # Human Resource Machine Interpreter
 
-<img src="assets/game.png" align="right" alt="Game img">
-
+<img src="assets/game.png" alt="Game img">
 
 Human Resource Machine is a game where you play an employee controlled by a block-like "programming language".
 The goal of this repository is to create an interpreter for this "programming language".
