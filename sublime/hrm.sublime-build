@@ -1,0 +1,5 @@
+{
+    "shell": true,
+    "cmd": ["python first_iteration.py $file"],
+    "selector": "source.c"
+}
