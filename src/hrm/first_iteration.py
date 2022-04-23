@@ -1,11 +1,38 @@
 """A first iteration to implement core mechanics."""
 
 
+class Instruction:
+
+    def __init__(self, string: str):
+        self.string = string
+
+        self.method = lambda: 0
+        self.args = ()
+
+        # TODO: parse argument & slot-args
+        # TODO: make a dispatcher
+        if string.startswith('outbox'):
+            _ins, n = string.split(' ')
+            self.method = self.outbox
+            self.args = (n,)
+
+    @staticmethod
+    def outbox(n):
+        print(n)
+
+    def process(self):
+        print('->', self.string)
+        self.method(*self.args)
+
+
 class Interpreter:
 
     def __init__(self, program):
         self.line = 0
-        self.program = program
+        self.program = [
+            Instruction(line) for line in program
+            if line and not line.startswith('#')
+        ]
 
     def __iter__(self):
         return self
@@ -20,13 +47,13 @@ class Interpreter:
 
 
 def main():
-    with open('prog_1.hrm') as f:
+    with open('outbox.hrm') as f:
         program = f.read().splitlines()
 
     program = Interpreter(program)
 
     for line in program:
-        print(line)
+        line.process()
 
 
 if __name__ == '__main__':
