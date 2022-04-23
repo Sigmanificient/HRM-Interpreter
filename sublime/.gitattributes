@@ -1,0 +1,3 @@
+*.sublime-color-scheme linguist-language=json
+*.sublime-build linguist-language=json
+*.sublime-syntax linguist-language=yaml
