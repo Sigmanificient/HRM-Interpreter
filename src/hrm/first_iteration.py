@@ -1,4 +1,6 @@
 """A first iteration to implement core mechanics."""
+from sys import argv
+from time import perf_counter
 
 
 class Instruction:
@@ -18,10 +20,9 @@ class Instruction:
 
     @staticmethod
     def outbox(n):
-        print(n)
+        print('->', n)
 
     def process(self):
-        print('->', self.string)
         self.method(*self.args)
 
 
@@ -46,15 +47,20 @@ class Interpreter:
         return line
 
 
-def main():
-    with open('outbox.hrm') as f:
+def main(*args):
+    path = args[1]
+    with open(path) as f:
         program = f.read().splitlines()
 
+    marker = perf_counter()
     program = Interpreter(program)
 
     for line in program:
         line.process()
 
+    elapsed = perf_counter() - marker
+    print(f"Run is {elapsed:,.3f}s")
+
 
 if __name__ == '__main__':
-    main()
+    main(*argv)
