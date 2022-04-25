@@ -22,12 +22,12 @@ class Instruction:
             self.args = (n,)
 
     @staticmethod
-    def outbox(n, state) -> State:
+    def outbox(state, n) -> State:
         print('->', n)
         return state
 
     def process(self, state) -> State:
-        return self.method(*self.args)
+        return self.method(state, *self.args)
 
 
 class Interpreter:
