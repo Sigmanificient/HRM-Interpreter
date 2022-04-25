@@ -1,6 +1,9 @@
 """A first iteration to implement core mechanics."""
 from sys import argv
 from time import perf_counter
+from typing import List, Optional, Union, Dict
+
+State = Dict[str, Union[Optional[List[int]], Optional[int], int]]
 
 
 class Instruction:
@@ -19,31 +22,40 @@ class Instruction:
             self.args = (n,)
 
     @staticmethod
-    def outbox(n):
+    def outbox(n, state) -> State:
         print('->', n)
+        return state
 
-    def process(self):
-        self.method(*self.args)
+    def process(self, state) -> State:
+        return self.method(*self.args)
 
 
 class Interpreter:
 
-    def __init__(self, program):
-        self.line = 0
+    def __init__(self, program, in_: Optional[List[int]] = None):
+        self.state: State = {
+            'in': in_ or [],
+            'hold': None,
+            'line': 0
+        }
+
         self.program = [
             Instruction(line) for line in program
             if line and not line.startswith('#')
         ]
 
+    def process(self, line):
+        self.state = line.process(self.state)
+
     def __iter__(self):
         return self
 
     def __next__(self):
-        if self.line >= len(self.program):
+        if self.state['line'] >= len(self.program):
             raise StopIteration
 
-        line = self.program[self.line]
-        self.line += 1
+        line = self.program[self.state['line']]
+        self.state['line'] += 1
         return line
 
 
@@ -56,7 +68,7 @@ def main(*args):
     program = Interpreter(program)
 
     for line in program:
-        line.process()
+        program.process(line)
 
     elapsed = perf_counter() - marker
     print(f"Run is {elapsed:,.3f}s")
