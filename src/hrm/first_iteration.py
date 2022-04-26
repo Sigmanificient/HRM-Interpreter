@@ -1,38 +1,43 @@
 """A first iteration to implement core mechanics."""
+from __future__ import annotations
+
 from sys import argv
 from time import perf_counter
-from typing import List, Optional, Union, Dict
+from typing import List, Optional, Union, Dict, Callable, Tuple
 
-State = Dict[str, Union[Optional[List[int]], Optional[int], int]]
+State = Dict[str, Union[Optional[int], List[int], int]]
 
 
 class Instruction:
 
-    def __init__(self, string: str):
-        self.string = string
+    def __init__(self, name: str):
+        self.name = name
 
-        self.method = lambda: 0
-        self.args = ()
+        def void(*_) -> None:
+            return None
+
+        self.method: Callable[[...], None] = void
+        self.args: Tuple[Union[int, str], ...] = ()
 
         # TODO: parse argument & slot-args
         # TODO: make a dispatcher
-        if string.startswith('outbox'):
-            _ins, n = string.split(' ')
+        if name.startswith('outbox'):
+            _ins, n = name.split(' ')
             self.method = self.outbox
             self.args = (n,)
 
     @staticmethod
-    def outbox(state, n) -> State:
-        print('->', n)
+    def outbox(state: State, n: Union[int, str]) -> State:
+        print(n)
         return state
 
-    def process(self, state) -> State:
+    def process(self, state: State) -> State:
         return self.method(state, *self.args)
 
 
 class Interpreter:
 
-    def __init__(self, program, in_: Optional[List[int]] = None):
+    def __init__(self, program: List[str], in_: Optional[List[int]] = None):
         self.state: State = {
             'in': in_ or [],
             'hold': None,
@@ -44,35 +49,37 @@ class Interpreter:
             if line and not line.startswith('#')
         ]
 
-    def process(self, line):
+    def process(self, line: Instruction):
         self.state = line.process(self.state)
 
-    def __iter__(self):
+    def __iter__(self) -> Interpreter:
         return self
 
-    def __next__(self):
+    def __next__(self) -> str:
         if self.state['line'] >= len(self.program):
             raise StopIteration
 
-        line = self.program[self.state['line']]
+        line: str = self.program[self.state['line']]
+
         self.state['line'] += 1
         return line
 
 
-def main(*args):
-    path = args[1]
+def main():
+    if len(argv) < 2:
+        print("No program provided !")
+        return
+
+    path = argv[1]    
+
     with open(path) as f:
         program = f.read().splitlines()
 
-    marker = perf_counter()
     program = Interpreter(program)
 
     for line in program:
         program.process(line)
 
-    elapsed = perf_counter() - marker
-    print(f"Run is {elapsed:,.3f}s")
-
 
 if __name__ == '__main__':
-    main(*argv)
+    main()
