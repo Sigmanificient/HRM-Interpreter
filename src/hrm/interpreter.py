@@ -1,7 +1,6 @@
 """A first iteration to implement core mechanics."""
 from __future__ import annotations
 
-from sys import argv
 from time import perf_counter
 from typing import List, Optional, Union, Dict, Callable, Tuple
 
@@ -63,23 +62,3 @@ class Interpreter:
 
         self.state['line'] += 1
         return line
-
-
-def main():
-    if len(argv) < 2:
-        print("No program provided !")
-        return
-
-    path = argv[1]    
-
-    with open(path) as f:
-        program = f.read().splitlines()
-
-    program = Interpreter(program)
-
-    for line in program:
-        program.process(line)
-
-
-if __name__ == '__main__':
-    main()
