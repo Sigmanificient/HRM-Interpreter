@@ -1,6 +1,6 @@
 # Human Resource Machine Interpreter
 
-<img src="banner.png" alt="Game img">
+<img src="https://raw.githubusercontent.com/Sigmanificient/HRM-Interpreter/main/docs/banner.png" alt="Game img">
 
 Human Resource Machine is a game where you play an employee controlled by a block-like "programming language".
 The goal of this repository is to create an interpreter for this "programming language".
