@@ -5,3 +5,8 @@
 __pycache__
 *.py[cod]
 venv
+
+# Packaging and distribution
+*.egg-info
+dist
+build
