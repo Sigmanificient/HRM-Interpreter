@@ -1,6 +1,6 @@
 import io
 from contextlib import redirect_stdout
-from src.hrmi import Interpreter
+from hrm import Interpreter
 
 
 def test_comments():
