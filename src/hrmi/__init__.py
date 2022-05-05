@@ -1,6 +1,4 @@
 """Hrm Interpreter Package."""
+from .interpreter import Interpreter
 
-from Interpreter import Interpreter
-
-
-__all__ = ('Interpreter')
+__all__ = ('Interpreter',)

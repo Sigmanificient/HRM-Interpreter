@@ -1,7 +1,7 @@
 """A first iteration to implement core mechanics."""
+
 from __future__ import annotations
 
-from time import perf_counter
 from typing import List, Optional, Union, Dict, Callable, Tuple
 
 State = Dict[str, Union[Optional[int], List[int], int]]

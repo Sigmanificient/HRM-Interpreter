@@ -2,7 +2,6 @@ from sys import argv
 from interpreter import Interpreter
 
 
-
 def main():
     if len(argv) < 2:
         print("No program provided !")
