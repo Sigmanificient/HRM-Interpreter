@@ -1,13 +1,14 @@
-jump 6
-copyto [d]
-sub [d]
-sub [d]
+jump           6
+copyto        :d
+sub           :d
+sub           :d
 outbox
 inbox
-jump if neg 2
-jump 5
+jump_n         2
+jump           5
 
 # other tests:
-bump -
-bump +
-jump if zero
+dec
+inc
+jump_z         0
+copyfrom     [0]
