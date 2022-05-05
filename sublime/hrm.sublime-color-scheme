@@ -29,12 +29,17 @@
 		{
 			"name": "HRM string",
 			"scope": "hrm.string.content",
-			"foreground": "var(pink)"
+			"foreground": "var(orange3)"
 		},
 		{
 			"name": "HRM comment",
 			"scope": "hrm.comment",
 			"foreground": "var(blue6)"
+		},
+		{
+			"name": "HRM pointer",
+			"scope": "hrm.pointer.to",
+			"foreground": "var(red2)"
 		}
 	]
 }
