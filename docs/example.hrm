@@ -8,7 +8,7 @@ jump_n         2
 jump           5
 
 # other tests:
-dec
-inc
+dec           :d
+inc           :d
 jump_z         0
 copyfrom     [0]
