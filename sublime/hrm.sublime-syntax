@@ -6,36 +6,47 @@ file_extensions:
 scope: source.hrm
 contexts:
   main:
-    - match: \d+
+    - match: '\d+'
       scope: hrm.digits
 
-    - match: inbox|outbox
+    - match: 'inbox|outbox'
       scope: hrm.std
 
-    - match: copyto|copyfrom
+    - match: 'copyto|copyfrom'
       scope: hrm.copy
 
-    - match: add|sub|bump|\-|\+
+    - match: 'add|sub|inc|dec'
       scope: hrm.operator
 
-    - match: jump|if|zero|neg
+    - match: 'jump(_[nz])?'
       scope: hrm.flow
 
-    - match: '\['
+    - match: ':'
       push: hrm.string
 
     - match: '#'
       push: hrm.comment
 
+    - match: '\['
+      push: hrm.pointer
+
   hrm.string:
     - meta_scope: hrm.string.quoted
-    - match: '\w'
+    - match: '\w+'
       scope: hrm.string.content
 
-    - match: ']'
+    - match: '$'
+      pop: true
+
+  hrm.pointer:
+    - meta_scope: hrm.pointer.section
+    - match: '\d+'
+      scope: hrm.pointer.to
+
+    - match: '\]'
       pop: true
 
   hrm.comment:
     - meta_scope: hrm.comment.content
-    - match: $
+    - match: '$'
       pop: true
