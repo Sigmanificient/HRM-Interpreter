@@ -17,4 +17,4 @@ def test_outbox():
             program.process(line)
 
     out = f.getvalue()
-    assert out == '-> 1\n-> 2\n'
+    assert out == '1\n2\n'
