@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from hrm.tiny import Tiny
+from hrm.types import Tiny
 
 
 class State:

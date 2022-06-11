@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Optional, Union, Dict, Callable, Tuple
+from typing import List, Optional, Union, Callable, Tuple
 
 from hrm.state import State
-from hrm.tiny import Tiny
+from hrm.types import Tiny
 
 
 class Instruction:

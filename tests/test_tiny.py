@@ -1,5 +1,5 @@
 import pytest
-from hrm.tiny import Tiny
+from hrm.types import Tiny
 
 
 def test_tiny_operations():
