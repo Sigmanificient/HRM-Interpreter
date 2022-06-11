@@ -4,7 +4,8 @@ from __future__ import annotations
 
 from typing import List, Optional, Union, Dict, Callable, Tuple
 
-State = Dict[str, Union[Optional[int], List[int], int]]
+from hrm.state import State
+from hrm.tiny import Tiny
 
 
 class Instruction:
@@ -26,7 +27,7 @@ class Instruction:
             self.args = (n,)
 
     @staticmethod
-    def outbox(state: State, n: Union[int, str]) -> State:
+    def outbox(state: State, n: Union[Tiny, str]) -> State:
         print(n)
         return state
 
@@ -36,12 +37,8 @@ class Instruction:
 
 class Interpreter:
 
-    def __init__(self, program: List[str], in_: Optional[List[int]] = None):
-        self.state: State = {
-            'in': in_ or [],
-            'hold': None,
-            'line': 0
-        }
+    def __init__(self, program: List[str], in_: Optional[List[Tiny]] = None):
+        self.state: State = State(in_)
 
         self.program = [
             Instruction(line) for line in program
@@ -55,10 +52,10 @@ class Interpreter:
         return self
 
     def __next__(self) -> str:
-        if self.state['line'] >= len(self.program):
+        if self.state.line >= len(self.program):
             raise StopIteration
 
-        line: str = self.program[self.state['line']]
+        line: str = self.program[self.state.line]
 
-        self.state['line'] += 1
+        self.state.line += 1
         return line
