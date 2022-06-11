@@ -1,5 +1,5 @@
 from sys import argv
-from interpreter import Interpreter
+from .interpreter import Interpreter
 
 
 def main():
