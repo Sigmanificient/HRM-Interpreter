@@ -1,5 +1,5 @@
 {
     "shell": true,
-    "cmd": ["python first_iteration.py $file"],
+    "cmd": ["python -m hrm $file"],
     "selector": "source.c"
 }
