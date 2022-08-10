@@ -1,0 +1,9 @@
+# Truth Machine in hrm
+inbox
+jump_z               7
+copy_to             :0
+outbox
+copy_from           :0
+add                 :0
+jump                 3
+outbox
