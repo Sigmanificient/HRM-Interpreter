@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import logging
 from typing import List, Optional
 
 from .state import State
+
+logger = logging.getLogger(__name__)
 
 
 class Interpreter:
@@ -17,5 +20,9 @@ class Interpreter:
         while self.state.line != self.state.eof:
             ins = self.instructions[self.state.line]
             ins(self.state)
+
+            logger.debug(
+                f'{self.state.line:>5}: {ins.__name__:>10} -> {self.state.memory}'
+            )
 
             self.state.line += 1

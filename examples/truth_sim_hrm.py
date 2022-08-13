@@ -1,6 +1,10 @@
+import logging
+
 from hrm import Interpreter
 from hrm.instructions import inbox, jump_z, copy_to, outbox, copy_from, jump
 
+
+logging.basicConfig(level=logging.DEBUG)
 
 Interpreter(
     instructions=[

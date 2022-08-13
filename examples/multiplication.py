@@ -1,7 +1,13 @@
+import logging
+
 from hrm import Interpreter
 from hrm.instructions import (
     inbox, copy_to, jump_z, dec, jump_n, copy_from, add, jump, outbox, sub
 )
+
+
+logging.basicConfig(level=logging.DEBUG)
+
 
 Interpreter(
     instructions=[
@@ -29,5 +35,5 @@ Interpreter(
         sub('result'),
         jump(14)
     ],
-    in_=[5, 4, 0, 1, 1, 1],
+    in_=[42, 69]
 ).run()
