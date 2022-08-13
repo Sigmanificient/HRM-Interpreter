@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from typing import List, Optional, Union, Callable, Tuple
 
-from hrm.state import State
-from hrm.types import Tiny
+from .state import State
+from .types import Tiny
 
 
 class Instruction:
