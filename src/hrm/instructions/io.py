@@ -3,7 +3,7 @@ def inbox(state):
         state.hold = next(state.inbox)
 
     except StopIteration:
-        state.hold = 0
+        state.hold = None
         state.line = state.eof - 1
 
 
