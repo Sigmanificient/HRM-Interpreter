@@ -1,4 +1,4 @@
-class Parser:
+class _Parser:
 
     def __init__(self):
         self.tokens = []
@@ -35,3 +35,6 @@ class Parser:
 
     def parse_tokens(self):
         print(self.tokens)
+
+
+parser = _Parser()

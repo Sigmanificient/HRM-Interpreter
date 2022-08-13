@@ -1,5 +1,8 @@
 """Hrm Interpreter Package."""
 from .interpreter import Interpreter
-from .parser import Parser
+from .parser import parser
 
-__all__ = ('Interpreter', 'Parser')
+__all__ = (
+    'Interpreter',
+    'parser',
+)

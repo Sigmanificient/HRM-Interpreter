@@ -1,5 +1,7 @@
+import pathlib
 from sys import argv
-from .interpreter import Interpreter
+
+from hrm import parser
 
 
 def main():
@@ -9,11 +11,8 @@ def main():
 
     path = argv[1]    
 
-    with open(path) as f:
-        program = Interpreter(f.read().splitlines())
- 
-    for line in program:
-        program.process(line)
+    program = pathlib.Path(path).read_text()
+    parser.parse(program)
 
 
 if __name__ == '__main__':
