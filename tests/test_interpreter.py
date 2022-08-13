@@ -1,20 +1,29 @@
-import io
-from contextlib import redirect_stdout
 from hrm import Interpreter
+from hrm.instructions import inbox
 
 
-def test_comments():
-    interpreter = Interpreter(['# a comment', '#'])
-    assert len(interpreter.program) == 0
+def test_inbox():
+    program = Interpreter([inbox], in_=[1])
+    program.run()
 
+    assert program.state.hold == 1
 
-def test_outbox():
-    program = Interpreter(['outbox 1', 'outbox 2'])
+    program = Interpreter([inbox], in_=[1, 2])
+    program.run()
 
-    f = io.StringIO()
-    with redirect_stdout(f):
-        for line in program:
-            program.process(line)
+    assert program.state.hold == 1
 
-    out = f.getvalue()
-    assert out == '1\n2\n'
+    program = Interpreter([inbox, inbox], in_=[1, 2, 3])
+    program.run()
+
+    assert program.state.hold == 2
+
+    program = Interpreter([inbox], in_=[])
+    program.run()
+
+    assert program.state.hold is None
+
+    program = Interpreter([inbox, inbox, inbox], in_=[1])
+    program.run()
+
+    assert program.state.hold is None
