@@ -1,3 +1,4 @@
-from .tiny import Tiny
+from .char import Char
+from .int import Int
 
-__all__ = ('Tiny',)
+__all__ = ('Char', 'Int')
